@@ -1,5 +1,5 @@
 import Product from '../model/product.js';
-// import ErrorHandler from '../Handlers/errorHandlers.js'
+import ErrorHandler from '../Handlers/errorHandlers.js'
 
 // create a new product api
 
@@ -24,15 +24,12 @@ export const getProducts = async (req, res, next) => {
    })
 }
 
-// single product api
+//get single product api
 export const getSingleProduct = async (req, res, next) => {
    const product = await Product.findById(req.params.id);
    if (!product) {
-      return res.status(404).json({
-         success: false,
-         message: 'product not found'
-      })
-   }
+      return next(new ErrorHandler('Product not found', 404));
+  }
    res.status(200).json({
       success: true,
       product

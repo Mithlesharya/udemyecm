@@ -26,7 +26,7 @@ Connection(db_username, db_pws);
 
 
 app.listen(PORT, () => {
-    console.log(`server started at ${PORT} in ${NODE_ENV} mode.`)
+    console.log(`Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`)
 });
 
 
