@@ -6,6 +6,13 @@ import bodyParser from 'body-parser';
 import { errorsMiddlewares } from './middlewares/errors.js';
 const app = express();
 
+//handle uncaught expection error
+process.on('uncaughtException', err =>{
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down server due to uncaught exception error');
+    process.exit(1);
+})
+
 app.use(express.json());
 
 dotenv.config();
@@ -23,7 +30,6 @@ const db_username = process.env.DB_USERNAME;
 const db_pws = process.env.DB_PASSWORD;
 
 Connection(db_username, db_pws);
-
 
 const server = app.listen(PORT, () => {
     console.log(`Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`)
