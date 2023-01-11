@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import product from './routes/product.js';
 import  Connection  from './database/database.js';
 import bodyParser from 'body-parser'; 
-import { errorsMiddlewares } from './middlewares/errors.js';
+import { errorsMiddlewares } from './Handlers/errors.js';
 const app = express();
 
 //handle uncaught expection error
