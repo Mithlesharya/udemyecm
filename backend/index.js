@@ -25,10 +25,17 @@ const db_pws = process.env.DB_PASSWORD;
 Connection(db_username, db_pws);
 
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`)
 });
 
+process.on('unhandledRejection', err =>{
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down the server due to unhandled promise rejection');
+    server.close(()=>{
+        process.exit(1);
+    })
+})
 
 
 
