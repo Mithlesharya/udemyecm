@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import product from './routes/product.js';
+import user from './routes/user.js';
 import  Connection  from './database/database.js';
 import bodyParser from 'body-parser'; 
 import { errorsMiddlewares } from './Handlers/errors.js';
@@ -18,6 +19,7 @@ app.use(express.json());
 dotenv.config();
 app.use(bodyParser.json({extended:true, urlencoded:true}));
 app.use('/', product)
+app.use('/', user)
 
 //middleware to handle error
 app.use(errorsMiddlewares);
