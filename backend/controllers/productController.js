@@ -20,8 +20,6 @@ export const getProducts = catchAsyncError(async (req, res, next) => {
    //pagination 
    const resultperPage = 4;
    const productCount = await Product.countDocuments();
-
-
    const apiFeatures = new ApiFeatures(Product.find(), req.query);
    apiFeatures.search() // call from apifeatures
    apiFeatures.filter() // call from apifeatures
