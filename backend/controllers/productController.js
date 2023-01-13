@@ -18,6 +18,7 @@ export const newProduct = catchAsyncError(async (req, res, next) => {
 export const getProducts = catchAsyncError(async (req, res, next) => {
    const apiFeatures = new ApiFeatures(Product.find(), req.query);
    apiFeatures.search() // call from apifeatures
+   apiFeatures.filter() // call from apifeatures
    const product = await apiFeatures.query;
    res.status(200).json({
       count: product.length,
