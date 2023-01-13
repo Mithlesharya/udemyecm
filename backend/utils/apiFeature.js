@@ -4,6 +4,8 @@ class ApiFeatures {
         this.queryStr = queryStr;
     }
 
+
+    //search product using product name
     search() {
         const keyword = this.queryStr.keyword ? {
             name: {
@@ -17,7 +19,7 @@ class ApiFeatures {
     }
 
 
-    // Filter product 
+    // Filter product  using category and price
 
     filter() {
         const queryCopy = { ...this.queryStr };
@@ -28,17 +30,26 @@ class ApiFeatures {
 
         //  console.log(queryCopy)
         // advance product filter using price and ratings etc
-        let queryStr =  JSON.stringify(queryCopy); // covert object to string
-     
+        let queryStr = JSON.stringify(queryCopy); // covert object to string
+
 
         //search using price eg: &price[gte]=1$price[lte]=200
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`)
-        
+
 
         this.query = this.query.find(JSON.parse(queryStr)); // now again covert string to object
         return this;
 
     }
+
+    //Pagination per page
+    pagination(resultperPage) {
+        const curPage = Number(this.queryStr.page) || 1 // page is type on search
+        const skipPage = resultperPage * (curPage - 1);
+        this.query = this.query.limit(resultperPage).skip(skipPage);
+        return this;
+    }
+
 }
 
 
