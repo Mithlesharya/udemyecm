@@ -6,6 +6,7 @@ import ApiFeatures from '../utils/apiFeature.js';
 // create a new product api
 
 export const newProduct = catchAsyncError(async (req, res, next) => {
+   req.body.user = req.user.id;// getting user id who create products
    const product = await Product.create(req.body);
    res.status(201).json({
       success: true,
@@ -16,7 +17,7 @@ export const newProduct = catchAsyncError(async (req, res, next) => {
 
 // get the all products api from database 
 export const getProducts = catchAsyncError(async (req, res, next) => {
- 
+
    //pagination 
    const resultperPage = 4;
    const productCount = await Product.countDocuments();

@@ -88,10 +88,12 @@ const productSchema = mongoose.Schema({
             }
         }
     ],
-    // user: {
-    //     type: String,
-    //     required: true
-    // },
+    // Save user id on data base who create a product simply
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now
