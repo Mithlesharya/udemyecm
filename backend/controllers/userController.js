@@ -21,7 +21,7 @@ export const registerUser = catchAsyncError(async (req, res, next) => {
     }
   })
 
-  sendToken(user, 200, res)
+  sendToken(user, 200, res, "registered successfully")
 
 })
 
@@ -45,7 +45,8 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler('Invalid Email and password', 401))
   }
-  sendToken(user, 200, res)
+
+  sendToken(user, 200, res, 'login successfully')
 
 })
 

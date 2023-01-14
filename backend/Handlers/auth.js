@@ -17,3 +17,13 @@ export const isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
     req.user = await User.findById(decoded.id);
     next()
 })
+
+// Authorize User Roles and Permissions 
+export const authoriseRoles = (...roles) =>{
+    return(req, res, next) =>{
+        if(!roles.includes(req.user.role)){
+           return next(new ErrorHandler(`Role ${req.user.role} is not allow  to access this resource, please make sure to be a admin`, 403))
+        }
+  
+    }
+}
