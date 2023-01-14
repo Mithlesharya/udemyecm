@@ -10,7 +10,7 @@ export const isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
     //    console.log(token)
 
     if (!token) {
-        return next(new ErrorHandler('login first to access this token.', 401))
+        return next(new ErrorHandler('Please login first to access this token.', 401))
     }
 
     const decoded = Jwt.verify(token, process.env.JWT_SECRET)

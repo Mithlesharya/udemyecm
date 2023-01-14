@@ -5,11 +5,11 @@ import { isAuthenticatedUser } from '../Handlers/auth.js';
 const router = express.Router();
 
 
-router.get('/products', isAuthenticatedUser, getProducts);
+router.get('/products', getProducts);
 router.get('/products/:id', getSingleProduct);
-router.post('/products/new', newProduct);
-router.put('/products/:id', updateProduct);
-router.delete('/products/:id', deleteProduct);
+router.post('/products/new', isAuthenticatedUser, newProduct);
+router.put('/products/:id', isAuthenticatedUser, updateProduct);
+router.delete('/products/:id', isAuthenticatedUser, deleteProduct);
 
 
 
