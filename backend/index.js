@@ -4,6 +4,7 @@ import product from './routes/product.js';
 import user from './routes/user.js';
 import  Connection  from './database/database.js';
 import bodyParser from 'body-parser'; 
+import cookieParser from 'cookie-parser';
 import { errorsMiddlewares } from './Handlers/errors.js';
 const app = express();
 
@@ -15,6 +16,7 @@ process.on('uncaughtException', err =>{
 })
 
 app.use(express.json());
+app.use(cookieParser());
 
 dotenv.config();
 app.use(bodyParser.json({extended:true, urlencoded:true}));
